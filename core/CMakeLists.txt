@@ -12,12 +12,34 @@ target_include_directories(${PROJECT_NAME} PUBLIC ${CORE_INCLUDE})
 
 SET(CORE_SRC
         src/Log/Log.cpp
-        src/Log/LogConsole.cpp)
+        src/Log/LogConsole.cpp
+
+        src/Base64/Base64.cpp
+
+        src/TCP/TCP.cpp
+        src/TCP/TCPConnection.cpp
+        src/TCP/TCPClient.cpp
+        src/TCP/TCPServer.cpp
+        )
 
 target_sources(${PROJECT_NAME} PRIVATE ${CORE_SRC})
 
-#find_package(nlohmann_json CONFIG REQUIRED)
-#target_link_libraries(${PROJECT_NAME} PUBLIC nlohmann_json nlohmann_json::nlohmann_json)
+find_package(nlohmann_json CONFIG REQUIRED)
+target_link_libraries(${PROJECT_NAME} PUBLIC nlohmann_json nlohmann_json::nlohmann_json)
 
-#find_package(Boost REQUIRED)
-#target_include_directories(${PROJECT_NAME} PUBLIC ${Boost_INCLUDE_DIRS})
+find_package(Boost REQUIRED)
+target_include_directories(${PROJECT_NAME} PUBLIC ${Boost_INCLUDE_DIRS})
+
+if (WIN32)
+    target_link_libraries(${PROJECT_NAME} PUBLIC Ws2_32 Wldap32 Crypt32 bcrypt)
+endif ()
+
+if (MACOSX)
+    find_library(CoreFoundation CoreFoundation)
+    find_library(IOKit IOKit)
+
+    target_link_libraries(PP-lib-AES PRIVATE
+            $<$<PLATFORM_ID:Darwin>:${CoreFoundation}>
+            $<$<PLATFORM_ID:Darwin>:${IOKit}>
+            )
+endif ()

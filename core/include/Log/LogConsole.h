@@ -5,22 +5,20 @@
 
 #include <string>
 
-namespace Diginext::Core::Log
-{
-    class ConsoleLogger : public Logger
-    {
+namespace Diginext::Core::Log {
+    class ConsoleLogger : public Logger {
     public:
-        static Logger::pointer create(const std::string& name = "logger", bool enabled = true);
+        static Logger::pointer create(const std::string &name = "logger", bool enabled = true);
 
-        explicit ConsoleLogger(const std::string& name, bool enabled = true);
+        explicit ConsoleLogger(const std::string &name, bool enabled = true);
 
-        void LogTrace(const std::string& msg) override;
-        void LogDebug(const std::string& msg) override;
-        void LogInfo(const std::string& msg) override;
-        void LogWarning(const std::string& msg) override;
-        void LogError(const std::string& msg) override;
-        void LogFatal(const std::string& msg) override;
+        void LogTrace(const std::string &msg) override;
+        void LogDebug(const std::string &msg) override;
+        void LogInfo(const std::string &msg) override;
+        void LogWarning(const std::string &msg) override;
+        void LogError(const std::string &msg) override;
+        void LogFatal(const std::string &msg) override;
     };
-}
+}// namespace Diginext::Core::Log
 
 #endif

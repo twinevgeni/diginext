@@ -6,3 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 add_executable(${PROJECT_NAME} src/main.cpp)
 target_link_libraries(${PROJECT_NAME} PRIVATE diginext.core)
+
+target_link_libraries(${PROJECT_NAME} PRIVATE
+        ${Boost_DATE_TIME_LIBRARY}
+        ${Boost_CHRONO_LIBRARY})
