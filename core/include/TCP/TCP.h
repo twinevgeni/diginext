@@ -5,6 +5,7 @@
 
 namespace Diginext::Core::TCP {
     const unsigned short RANDOM_PORT = 0;
+    const unsigned short DEFAULT_PORT = 9911;
 
     const std::string LOCAL_ADDRESS_TCP_V4 = "127.0.0.1";
     const std::string LOCAL_ADDRESS_TCP_V6 = "::1";

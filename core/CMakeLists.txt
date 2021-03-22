@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.15)
 set(CMAKE_OSX_DEPLOYMENT_TARGET "10.12" CACHE STRING "Minimum OS X deployment version")
 project(diginext.core)
 
@@ -20,6 +20,9 @@ SET(CORE_SRC
         src/TCP/TCPConnection.cpp
         src/TCP/TCPClient.cpp
         src/TCP/TCPServer.cpp
+
+        src/Storage/StorageServer.cpp
+        src/Storage/StorageClient.cpp
         )
 
 target_sources(${PROJECT_NAME} PRIVATE ${CORE_SRC})

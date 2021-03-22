@@ -5,6 +5,10 @@
 #include <string>
 
 namespace Diginext::Core::Log {
+
+    /**
+     * \brief Класс логера
+     */
     class Logger {
     private:
         std::string name;

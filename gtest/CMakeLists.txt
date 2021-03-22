@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.15)
 set(CMAKE_OSX_DEPLOYMENT_TARGET "10.12" CACHE STRING "Minimum OS X deployment version")
 project(diginext.gtest)
 
@@ -9,7 +9,6 @@ target_link_libraries(${PROJECT_NAME} PRIVATE diginext.core)
 
 find_package(GTest CONFIG REQUIRED)
 target_link_libraries(${PROJECT_NAME} PRIVATE GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
-target_link_libraries(${PROJECT_NAME} PRIVATE diginext.core)
 
 SET(GTEST_INCLUDE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 target_include_directories(${PROJECT_NAME} PRIVATE ${GTEST_INCLUDE})

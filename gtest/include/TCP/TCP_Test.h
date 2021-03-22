@@ -29,17 +29,17 @@ namespace Diginext::Core::TCP::GTest {
         tcp_all_log_enable();
     }
 
-    tcp::endpoint getLocalEndpointV4(const unsigned port = RANDOM_PORT) {
+    tcp::endpoint getLocalEndpointV4(const unsigned short port = RANDOM_PORT) {
         auto ip = boost::asio::ip::address::from_string(LOCAL_ADDRESS_TCP_V4);
         return tcp::endpoint(ip, port);
     }
 
-    tcp::endpoint getLocalEndpointV6(const unsigned port = RANDOM_PORT) {
+    tcp::endpoint getLocalEndpointV6(const unsigned short port = RANDOM_PORT) {
         auto ip = boost::asio::ip::address::from_string(LOCAL_ADDRESS_TCP_V6);
         return tcp::endpoint(ip, port);
     }
 
-    tcp::endpoint getLocalEndpoint(const unsigned port = RANDOM_PORT) {
+    tcp::endpoint getLocalEndpoint(const unsigned short port = RANDOM_PORT) {
         return getLocalEndpointV6(port);
     }
 

@@ -6,6 +6,10 @@
 #include <string>
 
 namespace Diginext::Core::Log {
+
+    /**
+     * \brief Консольный логер
+     */
     class ConsoleLogger : public Logger {
     public:
         static Logger::pointer create(const std::string &name = "logger", bool enabled = true);

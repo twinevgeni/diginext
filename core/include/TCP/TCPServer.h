@@ -58,7 +58,7 @@ namespace Diginext::Core::TCP {
         typedef boost::shared_ptr<tcp_server> pointer;
         static pointer create(tcp::endpoint &endpoint);
 
-        tcp_server(tcp::endpoint &endpoint);
+        explicit tcp_server(tcp::endpoint &endpoint);
         virtual ~tcp_server();
 
         tcp::acceptor *getAcceptor();

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.15)
 set(CMAKE_OSX_DEPLOYMENT_TARGET "10.12" CACHE STRING "Minimum OS X deployment version")
 project(diginext)
 
@@ -41,5 +41,5 @@ endif ()
 add_subdirectory(core)
 add_subdirectory(test.LogConsole)
 add_subdirectory(gtest)
-#add_subdirectory(server)
+add_subdirectory(server)
 #add_subdirectory(client)
