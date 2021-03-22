@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 
+#include "Base64/Base64_Test.h"
 #include "TCP/TCP_Test.h"
 
 int main(int argc, char** argv)

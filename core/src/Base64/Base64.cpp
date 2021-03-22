@@ -119,11 +119,14 @@ namespace Diginext::Core
 
     std::string Base64::Encode(const std::string &data)
     {
+        if (data.empty()) return std::string();
         return Encode(data.c_str(), data.size());
     }
 
     std::string Base64::Decode(const std::string& base64)
     {
+        if (base64.empty()) return std::string();
+
         char* outBin;
         size_t outLength;
 
