@@ -59,7 +59,6 @@ namespace Diginext::Core::TCP
 		try
 		{
 			std::lock_guard<std::mutex> guard(this->server_sync);
-			std::cout << "A client connected" << std::endl;
 			connections.push_back(new_connection);
 
 			new_connection->onDisconnected.connect(boost::bind(&tcp_server::handle_tcp_connection_disconnected, this, _1));
