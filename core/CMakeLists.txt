@@ -35,14 +35,17 @@ target_include_directories(${PROJECT_NAME} PUBLIC ${Boost_INCLUDE_DIRS})
 
 if (WIN32)
     target_link_libraries(${PROJECT_NAME} PUBLIC Ws2_32 Wldap32 Crypt32 bcrypt)
-endif ()
-
-if (MACOSX)
+elseif (MACOSX)
     find_library(CoreFoundation CoreFoundation)
     find_library(IOKit IOKit)
 
-    target_link_libraries(PP-lib-AES PRIVATE
+    target_link_libraries(${PROJECT_NAME} PRIVATE
             $<$<PLATFORM_ID:Darwin>:${CoreFoundation}>
             $<$<PLATFORM_ID:Darwin>:${IOKit}>
             )
-endif ()
+else()
+    find_package (Threads REQUIRED)
+    target_link_libraries(${PROJECT_NAME}
+            ${CMAKE_THREAD_LIBS_INIT}
+            )
+endif()

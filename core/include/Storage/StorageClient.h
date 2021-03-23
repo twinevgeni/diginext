@@ -29,6 +29,8 @@ namespace Diginext::Core::Storage {
     private:
         Logger::pointer logger;
         tcp_client::pointer tcpClient;
+        string host;
+        unsigned short port;
 
     public:
         typedef shared_ptr<StorageClient> pointer;
@@ -43,10 +45,30 @@ namespace Diginext::Core::Storage {
         */
         bool Started() const;
 
+        /**
+         * @brief connect
+         */
         void Connect();
+
+        /**
+         * @brief dissconect
+         */
         void Disconnect();
 
+        /**
+         * @brief send message to server
+         * @param[in] msg
+         */
+        void send(const std::string& msg);
+
         //handlers
+        void handle_connection_timed_oud(tcp::endpoint &endpoint);
+        void handle_connection_error(tcp::endpoint &endpoint, const boost::system::error_code &ec);
+        void handle_connection_success(tcp::endpoint &endpoint);
+        void handle_disconnected();
+        void handle_read_message(std::string msg);
+        void handle_read_error(const boost::system::error_code error, size_t bytes_transferred);
+        void handle_send_error(const boost::system::error_code error, size_t bytes_transferred);
     };
 }
 

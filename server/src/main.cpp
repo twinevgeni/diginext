@@ -7,11 +7,6 @@ using namespace Diginext::Core::Storage;
 using namespace std::chrono_literals;
 
 int main(int argc, char** argv) {
-    for (int argIndex = 0; argIndex < argc; argIndex++)
-    {
-
-    }
-
     Diginext::Core::TCP::tcp_all_log_disable();
 
     StorageServer::pointer server = StorageServer::create();

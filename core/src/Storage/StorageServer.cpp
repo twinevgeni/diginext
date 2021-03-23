@@ -29,15 +29,31 @@ namespace Diginext::Core::Storage {
     StorageServer::~StorageServer() {
     }
 
+    bool StorageServer::keyExists(string key) {
+        std::lock_guard<std::mutex> guard(this->dataSync);
+        return this->dataStorage.find(key) != this->dataStorage.end();
+    }
+
+    string StorageServer::readValue(string key) {
+        std::lock_guard<std::mutex> guard(this->dataSync);
+        if (this->keyExists(key)) {
+            return this->dataStorage[key];
+        }
+
+        return std::string();
+    }
+
+    void StorageServer::writeValue(string key, string value) {
+        std::lock_guard<std::mutex> guard(this->dataSync);
+        this->dataStorage[key] = value;
+    }
+
     bool StorageServer::Started() const {
-        try
-        {
+        try {
             if (this->tcpServer != nullptr) {
                 return this->tcpServer->started();
             }
-        }
-        catch (...)
-        {
+        } catch (...) {
         }
 
         return false;
@@ -53,8 +69,7 @@ namespace Diginext::Core::Storage {
 
     void StorageServer::Start() {
         this->logger->LogInfo("... starting server ...");
-        if (this->tcpServer != nullptr && this->tcpServer->started())
-        {
+        if (this->tcpServer != nullptr && this->tcpServer->started()) {
             logger->LogInfo("server already started");
             return;
         }
@@ -73,27 +88,26 @@ namespace Diginext::Core::Storage {
     }
 
     void StorageServer::handle_accept(tcp_connection::pointer connection) {
-        this->logger->LogInfo("accept new connection with uuid: " + connection->getUUID());
+        this->logger->LogInfo("tcp | accept new connection with uuid: " + connection->getUUID());
     }
 
     void StorageServer::handle_accept_error(tcp_connection::pointer connection, const boost::system::error_code error) {
-        this->logger->LogInfo("accept error with uuid: " + connection->getUUID());
-
+        this->logger->LogInfo("tcp | accept error with uuid: " + connection->getUUID());
     }
 
     void StorageServer::handle_disconnect(tcp_connection::pointer connection) {
-        this->logger->LogInfo("client disconnected | uuid: " + connection->getUUID());
+        this->logger->LogInfo("tcp | client disconnected | uuid: " + connection->getUUID());
     }
 
     void StorageServer::handle_read_message(tcp_connection::pointer connection, std::string msg) {
-        this->logger->LogInfo("new message from client | uuid: " + connection->getUUID() + " | msg: " + msg);
+        this->logger->LogInfo("tcp | new message from client | uuid: " + connection->getUUID() + " | msg: " + msg);
     }
 
     void StorageServer::handle_read_error(tcp_connection::pointer connection, const boost::system::error_code error, size_t bytes_transferred) {
-        this->logger->LogInfo("msg read error | uuid: " + connection->getUUID() + " | error: " + error.message());
+        this->logger->LogInfo("tcp | msg read error | uuid: " + connection->getUUID() + " | error: " + error.message());
     }
 
     void StorageServer::handle_send_error(tcp_connection::pointer connection, const boost::system::error_code error, size_t bytes_transferred) {
-        this->logger->LogInfo("msg send error | uuid: " + connection->getUUID() + " | error: " + error.message());
+        this->logger->LogInfo("tcp | msg send error | uuid: " + connection->getUUID() + " | error: " + error.message());
     }
 }// namespace Diginext::Core::Storage

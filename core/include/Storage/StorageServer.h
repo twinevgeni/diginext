@@ -31,6 +31,10 @@ namespace Diginext::Core::Storage {
         std::map<string, string> dataStorage;
         std::mutex dataSync;
 
+        bool keyExists(string key);
+        string readValue(string key);
+        void writeValue(string key, string value);
+
     public:
         typedef shared_ptr<StorageServer> pointer;
         static pointer create(const string &host = LOCAL_ADDRESS_TCP_V6, const unsigned short port = DEFAULT_PORT);
