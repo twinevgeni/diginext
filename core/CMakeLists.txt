@@ -39,13 +39,13 @@ elseif (MACOSX)
     find_library(CoreFoundation CoreFoundation)
     find_library(IOKit IOKit)
 
-    target_link_libraries(${PROJECT_NAME} PRIVATE
+    target_link_libraries(${PROJECT_NAME} PUBLIC
             $<$<PLATFORM_ID:Darwin>:${CoreFoundation}>
             $<$<PLATFORM_ID:Darwin>:${IOKit}>
             )
 else()
     find_package (Threads REQUIRED)
-    target_link_libraries(${PROJECT_NAME}
+    target_link_libraries(${PROJECT_NAME} PUBLIC
             ${CMAKE_THREAD_LIBS_INIT}
             )
 endif()
