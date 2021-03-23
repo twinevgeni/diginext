@@ -1,6 +1,10 @@
 #ifndef DIGINEXT_CORE___LOG_LOG_H
 #define DIGINEXT_CORE___LOG_LOG_H
 
+#ifndef BOOST_BIND_GLOBAL_PLACEHOLDERS
+#define BOOST_BIND_GLOBAL_PLACEHOLDERS
+#endif
+
 #include <memory>
 #include <string>
 
