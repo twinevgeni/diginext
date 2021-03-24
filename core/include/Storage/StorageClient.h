@@ -1,12 +1,13 @@
 #ifndef DIGINEXT_CORE___STORAGE_STORAGE_CLIENT_H
 #define DIGINEXT_CORE___STORAGE_STORAGE_CLIENT_H
 
+#include "Storage/StorageCommon.h"
+#include "Log/Log.h"
+#include "TCP/TCP.h"
+#include "TCP/TCPClient.h"
+
 #include <memory>
 #include <string>
-
-#include <Log/Log.h>
-#include <TCP/TCP.h>
-#include <TCP/TCPClient.h>
 
 #include <map>
 #include <mutex>
@@ -31,6 +32,7 @@ namespace Diginext::Core::Storage {
         tcp_client::pointer tcpClient;
         string host;
         unsigned short port;
+        string answer;
 
     public:
         typedef shared_ptr<StorageClient> pointer;
@@ -60,6 +62,12 @@ namespace Diginext::Core::Storage {
          * @param[in] msg
          */
         void send(const std::string& msg);
+
+        /**
+         * @brief get answer
+         * @return answer
+         */
+        string getAnswer() const;
 
         //handlers
         void handle_connection_timed_oud(tcp::endpoint &endpoint);

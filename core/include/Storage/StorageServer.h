@@ -1,12 +1,13 @@
 #ifndef DIGINEXT_CORE___STORAGE_STORAGE_SERVER_H
 #define DIGINEXT_CORE___STORAGE_STORAGE_SERVER_H
 
+#include "Storage/StorageCommon.h"
+#include "Log/Log.h"
+#include "TCP/TCP.h"
+#include "TCP/TCPServer.h"
+
 #include <memory>
 #include <string>
-
-#include <Log/Log.h>
-#include <TCP/TCP.h>
-#include <TCP/TCPServer.h>
 
 #include <map>
 #include <mutex>
@@ -34,6 +35,10 @@ namespace Diginext::Core::Storage {
         bool keyExists(string key);
         string readValue(string key);
         void writeValue(string key, string value);
+
+        void sendErrorStatus(tcp_connection::pointer connection, const string& description);
+        void sendOkRead(tcp_connection::pointer connection, const string& value);
+        void sendOkWrite(tcp_connection::pointer connection);
 
     public:
         typedef shared_ptr<StorageServer> pointer;

@@ -63,31 +63,37 @@ namespace Diginext::Core::Storage {
         this->tcpClient->send(msg);
     }
 
+    string StorageClient::getAnswer() const
+    {
+        return this->answer;
+    }
+
     void StorageClient::handle_connection_timed_oud(tcp::endpoint &endpoint) {
-        this->logger->LogInfo("tcp | connection time out");
+        this->logger->LogInfo("client | connection time out");
     }
 
     void StorageClient::handle_connection_error(tcp::endpoint &endpoint, const boost::system::error_code &ec) {
-        this->logger->LogInfo("tcp | connection error: " + ec.message());
+        this->logger->LogInfo("client | connection error: " + ec.message());
     }
 
     void StorageClient::handle_connection_success(tcp::endpoint &endpoint) {
-        this->logger->LogInfo("tcp | connection success");
+        this->logger->LogInfo("client | connection success");
     }
 
     void StorageClient::handle_disconnected() {
-        this->logger->LogInfo("tcp | disconnected");
+        this->logger->LogInfo("client | disconnected");
     }
 
     void StorageClient::handle_read_message(std::string msg) {
-        this->logger->LogInfo("tcp | new message read | msg: " + msg);
+        this->logger->LogInfo("client | new message read | msg: " + msg);
+        this->answer = msg;
     }
 
     void StorageClient::handle_read_error(const boost::system::error_code error, size_t bytes_transferred) {
-        this->logger->LogInfo("tcp | read error: " + error.message());
+        this->logger->LogInfo("client | read error: " + error.message());
     }
 
     void StorageClient::handle_send_error(const boost::system::error_code error, size_t bytes_transferred) {
-        this->logger->LogInfo("tcp | send error: " + error.message());
+        this->logger->LogInfo("client | send error: " + error.message());
     }
 }// namespace Diginext::Core::Storage
