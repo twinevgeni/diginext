@@ -30,4 +30,8 @@
 
 4. run server
 
-``
+run `./build/server/diginext.server`
+
+5. run client
+
+run `./build/client/diginext.client`
