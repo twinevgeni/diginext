@@ -172,8 +172,6 @@ namespace Diginext::Core::Storage {
         } catch (...) {
             this->sendErrorStatus(connection, "json parse error");
         }
-
-        connection->disconnect();
     }
 
     void StorageServer::handle_read_error(tcp_connection::pointer connection, const boost::system::error_code error, size_t bytes_transferred) {
