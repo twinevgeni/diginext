@@ -35,7 +35,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC ${Boost_INCLUDE_DIRS})
 
 if (WIN32)
     target_link_libraries(${PROJECT_NAME} PUBLIC Ws2_32 Wldap32 Crypt32 bcrypt)
-elseif (MACOSX)
+elseif (MACOS)
     find_library(CoreFoundation CoreFoundation)
     find_library(IOKit IOKit)
 
